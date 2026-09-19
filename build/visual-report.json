@@ -1,0 +1,251 @@
+[
+  {
+    "label": "desktop",
+    "errors": [],
+    "width": 1440,
+    "scrollWidth": 1440,
+    "height": 5874,
+    "font": "\"Great Vibes\", \"Brush Script MT\", cursive",
+    "brokenImages": [],
+    "unseen": 0,
+    "events": 4,
+    "photos": 3,
+    "bytes": 625485,
+    "resources": [
+      {
+        "name": "http://127.0.0.1:8088/css/styles.css",
+        "size": 28805
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/main.js",
+        "size": 1799
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/floral-spray.svg",
+        "size": 4053
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/music.js",
+        "size": 5563
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/intro.js",
+        "size": 4965
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/effects.js",
+        "size": 3837
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/scratch-date.js",
+        "size": 7397
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/countdown.js",
+        "size": 2343
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/sharing.js",
+        "size": 2298
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/fonts/GreatVibes-Regular.woff",
+        "size": 216728
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/fonts/CormorantGaramond-Variable.woff",
+        "size": 326552
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-1.svg",
+        "size": 4583
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-2.svg",
+        "size": 4999
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-3.svg",
+        "size": 4912
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/favicon.svg",
+        "size": 635
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/favicon.svg",
+        "size": 0
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/venue.svg",
+        "size": 6016
+      }
+    ]
+  },
+  {
+    "label": "mobile",
+    "errors": [],
+    "width": 390,
+    "scrollWidth": 390,
+    "height": 8118,
+    "font": "\"Great Vibes\", \"Brush Script MT\", cursive",
+    "brokenImages": [],
+    "unseen": 0,
+    "events": 4,
+    "photos": 3,
+    "bytes": 625485,
+    "resources": [
+      {
+        "name": "http://127.0.0.1:8088/css/styles.css",
+        "size": 28805
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/main.js",
+        "size": 1799
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/floral-spray.svg",
+        "size": 4053
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/music.js",
+        "size": 5563
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/intro.js",
+        "size": 4965
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/scratch-date.js",
+        "size": 7397
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/countdown.js",
+        "size": 2343
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/effects.js",
+        "size": 3837
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/sharing.js",
+        "size": 2298
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/fonts/GreatVibes-Regular.woff",
+        "size": 216728
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/fonts/CormorantGaramond-Variable.woff",
+        "size": 326552
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-1.svg",
+        "size": 4583
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/favicon.svg",
+        "size": 635
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/favicon.svg",
+        "size": 0
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-2.svg",
+        "size": 4999
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-3.svg",
+        "size": 4912
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/venue.svg",
+        "size": 6016
+      }
+    ]
+  },
+  {
+    "label": "small",
+    "errors": [],
+    "width": 320,
+    "scrollWidth": 320,
+    "height": 8316,
+    "font": "\"Great Vibes\", \"Brush Script MT\", cursive",
+    "brokenImages": [],
+    "unseen": 0,
+    "events": 4,
+    "photos": 3,
+    "bytes": 625485,
+    "resources": [
+      {
+        "name": "http://127.0.0.1:8088/css/styles.css",
+        "size": 28805
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/main.js",
+        "size": 1799
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/floral-spray.svg",
+        "size": 4053
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/fonts/GreatVibes-Regular.woff",
+        "size": 216728
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/fonts/CormorantGaramond-Variable.woff",
+        "size": 326552
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-1.svg",
+        "size": 4583
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/intro.js",
+        "size": 4965
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/music.js",
+        "size": 5563
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/scratch-date.js",
+        "size": 7397
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/countdown.js",
+        "size": 2343
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/effects.js",
+        "size": 3837
+      },
+      {
+        "name": "http://127.0.0.1:8088/js/sharing.js",
+        "size": 2298
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/favicon.svg",
+        "size": 635
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/favicon.svg",
+        "size": 0
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-2.svg",
+        "size": 4999
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/story-3.svg",
+        "size": 4912
+      },
+      {
+        "name": "http://127.0.0.1:8088/assets/images/venue.svg",
+        "size": 6016
+      }
+    ]
+  }
+]

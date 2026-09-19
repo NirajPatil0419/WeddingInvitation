@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Join us to celebrate our wedding with family and friends.">
+    <meta name="theme-color" content="#faf6ef">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Niraj &amp; Tanaya | Wedding Invitation">
+    <meta property="og:description" content="Join us to celebrate our wedding with family and friends.">
+    <title>Niraj &amp; Tanaya | Wedding Invitation</title>
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#invitation">Skip to invitation</a>
+    <div class="page-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+    <div class="petals" data-petals aria-hidden="true"></div>
+
+    <section id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Open your wedding invitation" hidden>
+      <div class="intro-panel intro-panel-left" aria-hidden="true"></div>
+      <div class="intro-panel intro-panel-right" aria-hidden="true"></div>
+      <img class="intro-botanical intro-botanical-left" src="assets/images/floral-spray.svg" alt="" width="500" height="600">
+      <img class="intro-botanical intro-botanical-right" src="assets/images/floral-spray.svg" alt="" width="500" height="600">
+      <div class="intro-content">
+        <p class="eyebrow">Some things are meant to be</p>
+        <p class="intro-heading">And so, our forever begins.</p>
+        <div class="envelope" aria-hidden="true">
+          <div class="envelope-letter"><span class="letter-label">YOU ARE INVITED</span><span class="letter-monogram">N &amp; T</span><span class="letter-flourish">With all our love</span></div>
+          <div class="envelope-back"></div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-front"></div>
+          <div class="wax-seal"><span>N &amp; T</span></div>
+        </div>
+        <button class="button button-rose" type="button" data-open-invitation>Open the invitation <span aria-hidden="true">↗</span></button>
+        <p class="intro-note">A celebration of love, with a little music.</p>
+      </div>
+      <video class="intro-video" data-intro-video data-src="" preload="none" muted playsinline hidden></video>
+      <button class="intro-skip" type="button" data-skip-intro>Skip to invitation <span aria-hidden="true">→</span></button>
+    </section>
+
+    <header class="site-header">
+      <a class="header-monogram" href="#invitation" aria-label="Back to the invitation">N &amp; T</a>
+      <nav aria-label="Invitation sections"><a href="#our-date">Our date</a><a href="#celebrations">Celebrations</a><a href="#venue">Venue</a></nav>
+      <span class="header-note">A celebration of forever</span>
+    </header>
+
+    <main id="invitation">
+      <section class="hero section" aria-labelledby="couple-names">
+        <img class="hero-floral hero-floral-left" src="assets/images/floral-spray.svg" alt="" width="500" height="600" fetchpriority="high">
+        <img class="hero-floral hero-floral-right" src="assets/images/floral-spray.svg" alt="" width="500" height="600">
+        <article class="invitation-card">
+          <div class="card-rule" aria-hidden="true"></div>
+          <div class="blessing-symbol" aria-hidden="true">ॐ</div>
+          <p class="blessing">With the blessings of our families</p>
+          <p class="hero-kicker">Together with our families</p>
+          <h1 id="couple-names" class="couple-names" tabindex="-1">
+            <span class="name name-bride">Tanaya</span>
+            <span class="name-connector"><i></i><span>&amp;</span><i></i></span>
+            <span class="name name-groom">Niraj</span>
+          </h1>
+          <p class="invitation-message">Together with our families, we invite you to celebrate our wedding.</p>
+          <div class="parents"><p></p><p></p></div>
+          <div class="card-footer-mark" aria-hidden="true">✦</div>
+        </article>
+        <a class="scroll-cue" href="#our-date"><span>A little magic awaits</span><span class="scroll-arrow" aria-hidden="true">↓</span></a>
+      </section>
+
+      <section id="our-date" class="date-section section date-reveal" aria-labelledby="date-heading">
+        <div class="section-intro reveal"><p class="eyebrow">One beautiful day. A lifetime together.</p><h2 id="date-heading">Save the <em>date</em></h2><p class="section-description">Every love story has a special date.<br>Scratch each card to discover ours.</p></div>
+        <div class="scratch-cards reveal">
+          <div class="scratch-card"><div class="scratch-value"><span class="scratch-label">Month</span><strong>November</strong><span class="scratch-flower" aria-hidden="true">❋</span></div><canvas data-scratch-canvas aria-label="Scratch to reveal the month" hidden></canvas><span class="scratch-instruction" aria-hidden="true">MONTH</span></div>
+          <div class="scratch-card"><div class="scratch-value"><span class="scratch-label">Day</span><strong>25</strong><span class="scratch-flower" aria-hidden="true">❋</span></div><canvas data-scratch-canvas aria-label="Scratch to reveal the day" hidden></canvas><span class="scratch-instruction" aria-hidden="true">DAY</span></div>
+          <div class="scratch-card"><div class="scratch-value"><span class="scratch-label">Year</span><strong>2026</strong><span class="scratch-flower" aria-hidden="true">❋</span></div><canvas data-scratch-canvas aria-label="Scratch to reveal the year" hidden></canvas><span class="scratch-instruction" aria-hidden="true">YEAR</span></div>
+        </div>
+        <button class="quiet-button" data-reveal-date type="button" hidden>Or, reveal our date <span aria-hidden="true">↗</span></button>
+        <p class="date-reveal-message" data-date-status aria-live="polite"></p>
+        <div class="countdown-section reveal" data-countdown data-date="2026-11-25T12:45:00+05:30">
+          <p class="eyebrow">Counting the moments until forever</p>
+          <div class="countdown" role="timer" aria-label="Time remaining until the wedding"><div><span data-days>—</span><small>Days</small></div><b aria-hidden="true">:</b><div><span data-hours>—</span><small>Hours</small></div><b aria-hidden="true">:</b><div><span data-minutes>—</span><small>Minutes</small></div><b aria-hidden="true">:</b><div><span data-seconds>—</span><small>Seconds</small></div></div>
+          <p class="countdown-message" data-countdown-message aria-live="polite"></p>
+          <noscript><p class="countdown-message">Our wedding: Wednesday, 25 November 2026 at 12:45 pm (GMT+05:30)</p></noscript>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"><span></span>❋<span></span></div>
+
+      <section id="our-story" class="story-section section" aria-labelledby="story-heading">
+        <div class="section-intro reveal"><p class="eyebrow">The little things. The big feelings.</p><h2 id="story-heading">Better <em>together</em></h2><p class="section-description">The little moments that brought us here, and the beautiful ones still to come.</p></div>
+        <div class="story-gallery"><figure class="polaroid reveal">
+  <img src="assets/images/story-1.svg" alt="Decorative illustration representing the beginning of our story" width="600" height="750" loading="lazy" decoding="async">
+  <figcaption>
+    <span class="story-number">01</span>
+    <h3>Our first chapter</h3>
+    <p>Every beautiful story begins with a little hello.</p>
+  </figcaption>
+</figure>
+<figure class="polaroid reveal">
+  <img src="assets/images/story-2.svg" alt="Decorative illustration representing shared adventures" width="600" height="750" loading="lazy" decoding="async">
+  <figcaption>
+    <span class="story-number">02</span>
+    <h3>Little adventures</h3>
+    <p>Finding our favourite moments in the everyday.</p>
+  </figcaption>
+</figure>
+<figure class="polaroid reveal">
+  <img src="assets/images/story-3.svg" alt="Decorative illustration celebrating a new beginning" width="600" height="750" loading="lazy" decoding="async">
+  <figcaption>
+    <span class="story-number">03</span>
+    <h3>Our forever begins</h3>
+    <p>One beautiful promise. A lifetime of togetherness.</p>
+  </figcaption>
+</figure>
+</div>
+        <p class="story-signoff reveal">Two hearts. One beautiful beginning.</p>
+      </section>
+
+      <section id="celebrations" class="celebrations-section section" aria-labelledby="celebrations-heading">
+        <div class="section-intro reveal"><p class="eyebrow">Let the festivities begin</p><h2 id="celebrations-heading">Days of <em>joy</em></h2><p class="section-description">A little laughter, a little dancing, and a whole lot of love.<br>We can't wait to celebrate with you.</p></div>
+        <div class="events-grid"><article class="event-card reveal" data-event-index="1">
+  <span class="event-number">01</span>
+  <span class="event-icon" aria-hidden="true"><svg viewBox="0 0 42 42" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M7 23h26c-1 8-5 12-13 12S8 31 7 23Z"/><path d="M13 18c0-4 4-4 4-8m6 8c0-4 4-4 4-8M5 23h30"/></svg></span>
+  <h3 class="event-title">Haldi</h3>
+  <p class="event-date">Tuesday, 24 November 2026</p>
+  <time class="event-time" datetime="2026-11-24T10:00:00+05:30">10:00 am</time>
+  <p class="event-description">A little turmeric, a lot of laughter, and a golden start to our celebrations.</p>
+  <p class="event-dresscode"><span>Dress code</span> Shades of yellow</p>
+  <a class="event-map" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">View location <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+</article>
+<article class="event-card reveal" data-event-index="2">
+  <span class="event-number">02</span>
+  <span class="event-icon" aria-hidden="true"><svg viewBox="0 0 42 42" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M20 35V17m0 12C8 29 8 20 8 20s12 0 12 9Zm0-8c10 0 12-10 12-10s-12 0-12 10Zm0-6C11 15 12 5 12 5s8 2 8 10Z"/></svg></span>
+  <h3 class="event-title">Mehendi</h3>
+  <p class="event-date">Tuesday, 24 November 2026</p>
+  <time class="event-time" datetime="2026-11-24T16:00:00+05:30">4:00 pm</time>
+  <p class="event-description">Henna-stained hands, happy hearts, and the company of our favourite people.</p>
+  <p class="event-dresscode"><span>Dress code</span> Colourful traditional wear</p>
+  <a class="event-map" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">View location <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+</article>
+<article class="event-card reveal" data-event-index="3">
+  <span class="event-number">03</span>
+  <span class="event-icon" aria-hidden="true"><svg viewBox="0 0 42 42" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M16 29V9l17-4v21M16 15l17-4"/><ellipse cx="11" cy="30" rx="5" ry="4"/><ellipse cx="28" cy="27" rx="5" ry="4"/></svg></span>
+  <h3 class="event-title">Sangeet</h3>
+  <p class="event-date">Tuesday, 24 November 2026</p>
+  <time class="event-time" datetime="2026-11-24T19:00:00+05:30">7:00 pm</time>
+  <p class="event-description">An evening of music, dancing, and memories we will carry forever.</p>
+  <p class="event-dresscode"><span>Dress code</span> Festive evening wear</p>
+  <a class="event-map" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">View location <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+</article>
+<article class="event-card reveal" data-event-index="4">
+  <span class="event-number">04</span>
+  <span class="event-icon" aria-hidden="true"><svg viewBox="0 0 42 42" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="14" cy="25" r="10"/><circle cx="27" cy="25" r="10"/><path d="m13 11 7-7 7 7-7 8-7-8Zm0 0h14M20 4v15"/></svg></span>
+  <h3 class="event-title">Wedding</h3>
+  <p class="event-date">Wednesday, 25 November 2026</p>
+  <time class="event-time" datetime="2026-11-25T12:45:00+05:30">12:45 pm</time>
+  <p class="event-description">With your love and blessings, we begin the most beautiful chapter of our lives.</p>
+  <p class="event-dresscode"><span>Dress code</span> Traditional wedding attire</p>
+  <a class="event-map" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">View location <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+</article>
+</div>
+      </section>
+
+      <section id="venue" class="venue-section section" aria-labelledby="venue-heading">
+        <div class="section-intro reveal"><p class="eyebrow">Where our forever begins</p><h2 id="venue-heading">Meet us <em>here</em></h2></div>
+        <div class="venue-card reveal">
+          <div class="venue-image-wrap"><img src="assets/images/venue.svg" alt="Decorative illustration of a wedding venue; replace with your venue photo" width="1000" height="650" loading="lazy" decoding="async"><span class="venue-image-label">A place for beautiful beginnings</span></div>
+          <div class="venue-details"><span class="venue-pin" aria-hidden="true"><svg viewBox="0 0 32 40" fill="none"><path d="M16 37S3 24 3 15a13 13 0 0 1 26 0c0 9-13 22-13 22Z" stroke="currentColor" stroke-width="1.3"/><circle cx="16" cy="15" r="4.5" stroke="currentColor" stroke-width="1.3"/></svg></span><h3>Your Wedding Venue</h3><address>Replace with the venue&#39;s full address, city, and postal code.</address><p class="venue-date">Wednesday, 25 November 2026<span>12:45 pm</span></p><a class="button button-outline" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span></a><p class="local-time" data-local-time-row hidden>In your local time: <time datetime="2026-11-25T12:45:00+05:30" data-local-time>Wednesday, 25 November 2026 at 12:45 pm (GMT+05:30)</time></p></div>
+        </div>
+      </section>
+
+      <section class="closing-section section" aria-labelledby="closing-heading">
+        <img class="closing-floral" src="assets/images/floral-spray.svg" alt="" width="500" height="600" loading="lazy">
+        <div class="closing-content reveal"><p class="eyebrow">Our day is complete with you</p><h2 id="closing-heading">Come for the wedding.<br>Stay for the <em>memories.</em></h2><p>We look forward to celebrating this special day with you.</p><p class="closing-names">Tanaya <span>&amp;</span> Niraj</p><p class="couple-hashtag">#NirajAndTanaya</p><button class="quiet-button share-button" type="button" data-share-invitation hidden>Share the joy <span aria-hidden="true">↗</span></button><p class="share-status" data-share-status role="status"></p></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>N &amp; T</span><p>Made with love, for the people we love.</p><a href="#invitation">Back to the beginning ↑</a></footer>
+    <audio data-music-audio data-src="" loop preload="none"></audio>
+    <button class="music-toggle" type="button" data-music-toggle aria-pressed="false" aria-label="Play background music" hidden><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="music-label" data-music-label>Music off</span></button>
+  </body>
+</html>
