@@ -23,6 +23,10 @@ Java is the build-time language. The output is a static website, with no hosted 
 | `config/wedding.properties` | Single editable source for names, dates, messages, gallery, events, venue, and optional media |
 | `WeddingConfig` | Typed Java record; reads UTF-8 properties and validates values |
 | `SiteGenerator` | Formats wedding data, copies assets, and creates deployment artifacts |
+| `AssetValidator` | Checks local media before replacing output and warns about large files |
+| `CalendarFiles` | Creates UTC calendar downloads with UTF-8 line folding |
+| `SharingAssets` | Draws a 1200 x 630 preview and generates conditional social metadata |
+| `Messages` and `messages/` | Interface text with English, language, and region fallback |
 | `HtmlTemplate` | One-pass replacement of escaped `{{name}}` text and typed `{{{fragment}}}` HTML |
 | `InvitationFragments` | Generates repeating event cards and story photos from fixed templates |
 | `templates/` | Page structure; placeholders belong in text or quoted attributes |
@@ -67,3 +71,13 @@ Fonts and decorative assets are local. No reference photos, audio, or video are 
 - Respect reduced-motion preferences for the opening and decorative effects.
 
 Concurrent delivery and animation smoothness are separate concerns. The deployment provider handles static requests, while media size and browser effects determine much of the experience on a guest's phone. There is no shared application server to scale, but this does not establish a measured 700-user capacity or guarantee performance on every device. Check mobile layouts and replacement media before publishing.
+
+## Build checks and development tools
+
+Java 21 is recorded in `.java-version`; scripts validate compiler and runtime versions. Node 22 and locked npm dependencies are development tools only. `npm test` rebuilds, runs Java contract checks, and runs Playwright with self-contained loopback servers. CI repeats this on Windows and Linux. Checks do not depend on a fixed port, external server, or hardcoded browser installation.
+
+All configured local media must be readable files inside the static directory. Asset validation, HTML rendering, and preview rendering happen before generated output is cleared. These input failures preserve the previous build. Remote media is not fetched. Copying both output directories is not a transaction: an I/O failure during copying may still require rebuilding. Generated artifacts and development dependencies are excluded from Git.
+
+Original fonts live in `tools/font-sources/`; the website serves WOFF2. The optional Python converter has separately pinned dependencies. The Java build uses Java2D and the original fonts for the preview, without an image service.
+
+A blank public URL disables URL-dependent social metadata. Once configured, it supplies canonical links, the preview image URL, sharing, and calendar URLs. Contact links are hidden until configured. Calendar files contain only start times. The summary makes the wedding date, venue, calendar, and directions available before the gallery.

@@ -1,3 +1,5 @@
+import { message as uiText } from "./messages.js";
+
 export function remainingTime(targetTime, now = Date.now()) {
   const milliseconds = typeof targetTime === "number" ? targetTime : Date.parse(targetTime);
   if (!Number.isFinite(milliseconds) || !Number.isFinite(now)) return null;
@@ -15,10 +17,15 @@ export function setupCountdown() {
   const root = document.querySelector("[data-countdown]");
   if (!root) return;
   const targetTime = Date.parse(root.dataset.date);
-  const message = root.querySelector("[data-countdown-message]")
-    || document.querySelector("[data-countdown-message]");
-  const fields = Object.fromEntries(["days", "hours", "minutes", "seconds"]
-    .map((key) => [key, root.querySelector(`[data-${key}]`)]));
+  const message =
+    root.querySelector("[data-countdown-message]") ||
+    document.querySelector("[data-countdown-message]");
+  const fields = Object.fromEntries(
+    ["days", "hours", "minutes", "seconds"].map((key) => [
+      key,
+      root.querySelector(`[data-${key}]`),
+    ]),
+  );
   let interval;
   let complete = false;
 
@@ -30,8 +37,10 @@ export function setupCountdown() {
   function tick() {
     const remaining = remainingTime(targetTime);
     if (!remaining) {
-      Object.values(fields).forEach((field) => { if (field) field.textContent = "—"; });
-      if (message) message.textContent = "We look forward to celebrating with you.";
+      Object.values(fields).forEach((field) => {
+        if (field) field.textContent = "—";
+      });
+      if (message) message.textContent = uiText("jsCountdownFallback");
       complete = true;
       stop();
       return;
@@ -42,7 +51,7 @@ export function setupCountdown() {
     if (remaining.complete) {
       complete = true;
       root.classList.add("is-complete");
-      if (message) message.textContent = "The celebration has begun!";
+      if (message) message.textContent = uiText("jsCountdownComplete");
       stop();
     }
   }

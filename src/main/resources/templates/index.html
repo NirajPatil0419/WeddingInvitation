@@ -1,119 +1,309 @@
 <!doctype html>
 <html lang="{{language}}">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{siteDescription}}">
-    <meta name="theme-color" content="#faf6ef">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{siteTitle}}">
-    <meta property="og:description" content="{{siteDescription}}">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{siteDescription}}" />
+    <meta name="theme-color" content="#a1aa91" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{siteTitle}}" />
+    <meta property="og:description" content="{{siteDescription}}" />
+    {{{sharingMetadata}}}
     <title>{{siteTitle}}</title>
-    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/main.js" type="module"></script>
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/Calimoe-Demo.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/styles.css?v={{assetVersion}}" />
+    <link rel="stylesheet" href="css/intro.css?v={{assetVersion}}" />
+    <script src="js/main.js?v={{assetVersion}}" type="module"></script>
   </head>
   <body>
-    <a class="skip-link" href="#invitation">Skip to invitation</a>
+    <a class="skip-link" href="#invitation">{{uiSkipInvitation}}</a>
     <div class="page-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
     <div class="petals" data-petals aria-hidden="true"></div>
 
-    <section id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Open your wedding invitation" hidden>
-      <div class="intro-panel intro-panel-left" aria-hidden="true"></div>
-      <div class="intro-panel intro-panel-right" aria-hidden="true"></div>
-      <img class="intro-botanical intro-botanical-left" src="assets/images/floral-spray.svg" alt="" width="500" height="600">
-      <img class="intro-botanical intro-botanical-right" src="assets/images/floral-spray.svg" alt="" width="500" height="600">
-      <div class="intro-content">
-        <p class="eyebrow">Some things are meant to be</p>
-        <p class="intro-heading">And so, our forever begins.</p>
-        <div class="envelope" aria-hidden="true">
-          <div class="envelope-letter"><span class="letter-label">YOU ARE INVITED</span><span class="letter-monogram">{{monogram}}</span><span class="letter-flourish">With all our love</span></div>
-          <div class="envelope-back"></div>
-          <div class="envelope-flap"></div>
-          <div class="envelope-front"></div>
-          <div class="wax-seal"><span>{{monogram}}</span></div>
+    <section
+      id="intro"
+      class="intro"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{uiIntroLabel}}"
+      data-opening-message="{{uiOpeningInvitation}}"
+      hidden
+    >
+      <div class="intro-scene" aria-hidden="true">
+        <div class="intro-letter">
+          <div class="intro-arch"></div>
+          <div class="intro-letter-botanical intro-letter-botanical-left"></div>
+          <div class="intro-letter-botanical intro-letter-botanical-right"></div>
+          <div class="intro-letter-copy">
+            <span class="intro-letter-note">{{uiTogetherFamilies}}</span>
+            <span class="intro-letter-name">{{groomName}}</span>
+            <span class="intro-letter-ampersand">&amp;</span>
+            <span class="intro-letter-name">{{brideName}}</span>
+            <span class="intro-letter-note">{{uiWithLove}}</span>
+          </div>
         </div>
-        <button class="button button-rose" type="button" data-open-invitation>Open the invitation <span aria-hidden="true">↗</span></button>
-        <p class="intro-note">A celebration of love, with a little music.</p>
+        <div class="intro-gate intro-gate-left"><div class="intro-botanical"></div></div>
+        <div class="intro-gate intro-gate-right"><div class="intro-botanical"></div></div>
       </div>
-      <video class="intro-video" data-intro-video data-src="{{introVideo}}" preload="none" muted playsinline hidden></video>
-      <button class="intro-skip" type="button" data-skip-intro>Skip to invitation <span aria-hidden="true">→</span></button>
+      <p class="intro-kicker">{{uiIntroEyebrow}}</p>
+      <button
+        class="intro-trigger"
+        type="button"
+        data-open-invitation
+        aria-label="{{uiOpenInvitation}}"
+      >
+        <span class="intro-tap-label">{{uiTapReveal}}</span>
+        <span class="intro-seal" aria-hidden="true">
+          <img
+            class="intro-seal-image"
+            src="assets/images/ganpati-seal.jpeg"
+            alt=""
+            width="352"
+            height="351"
+            fetchpriority="high"
+            draggable="false"
+          />
+        </span>
+      </button>
+      <div class="intro-light" aria-hidden="true"></div>
+      <video
+        class="intro-video"
+        data-intro-video
+        data-src="{{introVideo}}"
+        preload="none"
+        muted
+        playsinline
+        hidden
+      ></video>
+      <button class="intro-skip" type="button" data-skip-intro>
+        {{uiSkipInvitation}} <span aria-hidden="true">&#8594;</span>
+      </button>
+      <p class="visually-hidden" role="status" data-intro-status></p>
     </section>
 
     <header class="site-header">
-      <a class="header-monogram" href="#invitation" aria-label="Back to the invitation">{{monogram}}</a>
-      <nav aria-label="Invitation sections"><a href="#our-date">Our date</a><a href="#celebrations">Celebrations</a><a href="#venue">Venue</a></nav>
-      <span class="header-note">A celebration of forever</span>
+      <a class="header-monogram" href="#invitation" aria-label="{{uiBackInvitation}}"
+        >{{groomInitial}} &amp; <span class="bride-initial">{{brideInitial}}</span></a
+      >
+      <nav aria-label="{{uiNavigation}}">
+        <a href="#our-date">{{uiOurDate}}</a><a href="#celebrations">{{uiCelebrations}}</a
+        ><a href="#venue">{{uiVenue}}</a>
+      </nav>
+      <span class="header-note">{{uiHeaderNote}}</span>
     </header>
 
     <main id="invitation">
-      <section class="hero section" aria-labelledby="couple-names">
-        <img class="hero-floral hero-floral-left" src="assets/images/floral-spray.svg" alt="" width="500" height="600" fetchpriority="high">
-        <img class="hero-floral hero-floral-right" src="assets/images/floral-spray.svg" alt="" width="500" height="600">
-        <article class="invitation-card">
-          <div class="card-rule" aria-hidden="true"></div>
-          <div class="blessing-symbol" aria-hidden="true">ॐ</div>
-          <p class="blessing">{{blessingText}}</p>
-          <p class="hero-kicker">Together with our families</p>
-          <h1 id="couple-names" class="couple-names" tabindex="-1">
-            <span class="name name-bride">{{brideName}}</span>
-            <span class="name-connector"><i></i><span>&amp;</span><i></i></span>
-            <span class="name name-groom">{{groomName}}</span>
-          </h1>
-          <p class="invitation-message">{{invitationMessage}}</p>
-          <div class="parents"><p>{{brideParents}}</p><p>{{groomParents}}</p></div>
-          <div class="card-footer-mark" aria-hidden="true">✦</div>
-        </article>
-        <a class="scroll-cue" href="#our-date"><span>A little magic awaits</span><span class="scroll-arrow" aria-hidden="true">↓</span></a>
-      </section>
-
-      <section id="our-date" class="date-section section date-reveal" aria-labelledby="date-heading">
-        <div class="section-intro reveal"><p class="eyebrow">One beautiful day. A lifetime together.</p><h2 id="date-heading">Save the <em>date</em></h2><p class="section-description">Every love story has a special date.<br>Scratch each card to discover ours.</p></div>
-        <div class="scratch-cards reveal">
-          <div class="scratch-card"><div class="scratch-value"><span class="scratch-label">Month</span><strong>{{weddingMonth}}</strong><span class="scratch-flower" aria-hidden="true">❋</span></div><canvas data-scratch-canvas aria-label="Scratch to reveal the month" hidden></canvas><span class="scratch-instruction" aria-hidden="true">MONTH</span></div>
-          <div class="scratch-card"><div class="scratch-value"><span class="scratch-label">Day</span><strong>{{weddingDay}}</strong><span class="scratch-flower" aria-hidden="true">❋</span></div><canvas data-scratch-canvas aria-label="Scratch to reveal the day" hidden></canvas><span class="scratch-instruction" aria-hidden="true">DAY</span></div>
-          <div class="scratch-card"><div class="scratch-value"><span class="scratch-label">Year</span><strong>{{weddingYear}}</strong><span class="scratch-flower" aria-hidden="true">❋</span></div><canvas data-scratch-canvas aria-label="Scratch to reveal the year" hidden></canvas><span class="scratch-instruction" aria-hidden="true">YEAR</span></div>
+      <section
+        id="our-date"
+        class="date-section section date-reveal"
+        aria-labelledby="date-heading"
+      >
+        <div class="section-intro reveal">
+          <p class="eyebrow">{{uiDateEyebrow}}</p>
+          <h1 id="date-heading" tabindex="-1">{{uiSaveThe}} <em>{{uiDate}}</em></h1>
+          <p class="section-description">{{uiDateDescription}}<br />{{uiScratchDescription}}</p>
         </div>
-        <button class="quiet-button" data-reveal-date type="button" hidden>Or, reveal our date <span aria-hidden="true">↗</span></button>
+        <div class="scratch-cards reveal">
+          <div class="scratch-card">
+            <div class="scratch-value">
+              <span class="scratch-label">{{uiMonth}}</span><strong>{{weddingMonth}}</strong
+              ><span class="scratch-flower" aria-hidden="true">❋</span>
+            </div>
+            <canvas data-scratch-canvas aria-label="{{uiScratchMonth}}" hidden></canvas
+            ><span class="scratch-instruction" aria-hidden="true">{{uiMonth}}</span>
+          </div>
+          <div class="scratch-card">
+            <div class="scratch-value">
+              <span class="scratch-label">{{uiDay}}</span><strong>{{weddingDay}}</strong
+              ><span class="scratch-flower" aria-hidden="true">❋</span>
+            </div>
+            <canvas data-scratch-canvas aria-label="{{uiScratchDay}}" hidden></canvas
+            ><span class="scratch-instruction" aria-hidden="true">{{uiDay}}</span>
+          </div>
+          <div class="scratch-card">
+            <div class="scratch-value">
+              <span class="scratch-label">{{uiYear}}</span><strong>{{weddingYear}}</strong
+              ><span class="scratch-flower" aria-hidden="true">❋</span>
+            </div>
+            <canvas data-scratch-canvas aria-label="{{uiScratchYear}}" hidden></canvas
+            ><span class="scratch-instruction" aria-hidden="true">{{uiYear}}</span>
+          </div>
+        </div>
+        <button class="quiet-button" data-reveal-date type="button" hidden>
+          {{uiRevealDate}} <span aria-hidden="true">↗</span>
+        </button>
         <p class="date-reveal-message" data-date-status aria-live="polite"></p>
         <div class="countdown-section reveal" data-countdown data-date="{{weddingDateTime}}">
-          <p class="eyebrow">Counting the moments until forever</p>
-          <div class="countdown" role="timer" aria-label="Time remaining until the wedding"><div><span data-days>—</span><small>Days</small></div><b aria-hidden="true">:</b><div><span data-hours>—</span><small>Hours</small></div><b aria-hidden="true">:</b><div><span data-minutes>—</span><small>Minutes</small></div><b aria-hidden="true">:</b><div><span data-seconds>—</span><small>Seconds</small></div></div>
+          <p class="eyebrow">{{uiCountdownEyebrow}}</p>
+          <div class="countdown" role="timer" aria-label="{{uiCountdownLabel}}">
+            <div><span data-days>—</span><small>{{uiDays}}</small></div>
+            <b aria-hidden="true">:</b>
+            <div><span data-hours>—</span><small>{{uiHours}}</small></div>
+            <b aria-hidden="true">:</b>
+            <div><span data-minutes>—</span><small>{{uiMinutes}}</small></div>
+            <b aria-hidden="true">:</b>
+            <div><span data-seconds>—</span><small>{{uiSeconds}}</small></div>
+          </div>
           <p class="countdown-message" data-countdown-message aria-live="polite"></p>
-          <noscript><p class="countdown-message">Our wedding: {{weddingDateLabel}}</p></noscript>
+          <noscript
+            ><p class="countdown-message">{{uiOurWedding}} {{weddingDateLabel}}</p></noscript
+          >
         </div>
       </section>
 
       <div class="section-divider" aria-hidden="true"><span></span>❋<span></span></div>
 
       <section id="our-story" class="story-section section" aria-labelledby="story-heading">
-        <div class="section-intro reveal"><p class="eyebrow">The little things. The big feelings.</p><h2 id="story-heading">Better <em>together</em></h2><p class="section-description">{{storySubtitle}}</p></div>
+        <div class="section-intro reveal">
+          <p class="eyebrow">{{uiStoryEyebrow}}</p>
+          <h2 id="story-heading">{{uiBetter}} <em>{{uiTogether}}</em></h2>
+          <p class="section-description">{{storySubtitle}}</p>
+        </div>
         <div class="story-gallery">{{{photosHtml}}}</div>
-        <p class="story-signoff reveal">Two hearts. One beautiful beginning.</p>
+        <p class="story-signoff reveal">{{uiStorySignoff}}</p>
       </section>
 
-      <section id="celebrations" class="celebrations-section section" aria-labelledby="celebrations-heading">
-        <div class="section-intro reveal"><p class="eyebrow">Let the festivities begin</p><h2 id="celebrations-heading">Days of <em>joy</em></h2><p class="section-description">A little laughter, a little dancing, and a whole lot of love.<br>We can't wait to celebrate with you.</p></div>
+      <section
+        id="celebrations"
+        class="celebrations-section section"
+        aria-labelledby="celebrations-heading"
+      >
+        <div class="section-intro reveal">
+          <p class="eyebrow">{{uiEventsEyebrow}}</p>
+          <h2 id="celebrations-heading">{{uiDaysOf}} <em>{{uiJoy}}</em></h2>
+          <p class="section-description">{{uiEventsDescription}}<br />{{uiEventsWelcome}}</p>
+        </div>
         <div class="events-grid">{{{eventsHtml}}}</div>
       </section>
 
       <section id="venue" class="venue-section section" aria-labelledby="venue-heading">
-        <div class="section-intro reveal"><p class="eyebrow">Where our forever begins</p><h2 id="venue-heading">Meet us <em>here</em></h2></div>
+        <div class="section-intro reveal">
+          <p class="eyebrow">{{uiVenueEyebrow}}</p>
+          <h2 id="venue-heading">{{uiMeetUs}} <em>{{uiHere}}</em></h2>
+        </div>
         <div class="venue-card reveal">
-          <div class="venue-image-wrap"><img src="{{venueImage}}" alt="{{venueImageAlt}}" width="1000" height="650" loading="lazy" decoding="async"><span class="venue-image-label">A place for beautiful beginnings</span></div>
-          <div class="venue-details"><span class="venue-pin" aria-hidden="true"><svg viewBox="0 0 32 40" fill="none"><path d="M16 37S3 24 3 15a13 13 0 0 1 26 0c0 9-13 22-13 22Z" stroke="currentColor" stroke-width="1.3"/><circle cx="16" cy="15" r="4.5" stroke="currentColor" stroke-width="1.3"/></svg></span><h3>{{venueName}}</h3><address>{{venueAddress}}</address><p class="venue-date">{{weddingWeekday}}, {{weddingDay}} {{weddingMonth}} {{weddingYear}}<span>{{weddingTime}}</span></p><a class="button button-outline" href="{{venueMapUrl}}" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span></a><p class="local-time" data-local-time-row hidden>In your local time: <time datetime="{{weddingDateTime}}" data-local-time>{{weddingDateLabel}}</time></p></div>
+          <div class="venue-image-wrap">
+            <img
+              src="{{venueImage}}"
+              alt="{{venueImageAlt}}"
+              width="1000"
+              height="650"
+              loading="lazy"
+              decoding="async"
+            /><span class="venue-image-label">{{uiVenueImageLabel}}</span>
+          </div>
+          <div class="venue-details">
+            <span class="venue-pin" aria-hidden="true"
+              ><svg viewBox="0 0 32 40" fill="none">
+                <path
+                  d="M16 37S3 24 3 15a13 13 0 0 1 26 0c0 9-13 22-13 22Z"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <circle cx="16" cy="15" r="4.5" stroke="currentColor" stroke-width="1.3" /></svg
+            ></span>
+            <h3>{{venueName}}</h3>
+            <address>{{venueAddress}}</address>
+            <p class="venue-date">
+              {{weddingWeekday}}, {{weddingDay}} {{weddingMonth}} {{weddingYear}}<span
+                >{{weddingTime}}</span
+              >
+            </p>
+            <a
+              class="button button-outline"
+              href="{{venueMapUrl}}"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><svg
+                class="maps-icon"
+                viewBox="0 0 24 34"
+                width="15"
+                height="21"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M12 0C5.4 0 0 5.4 0 12c0 9 12 22 12 22s12-13 12-22C24 5.4 18.6 0 12 0Z"
+                  fill="#ea4335"
+                />
+                <path d="M3.5 3.5A12 12 0 0 1 12 0v7.5a4.5 4.5 0 0 0-3.2 1.3Z" fill="#4285f4" />
+                <path d="M0 12a12 12 0 0 1 3.5-8.5l5.3 5.3A4.5 4.5 0 0 0 7.5 12Z" fill="#1a73e8" />
+                <path d="M1.4 17.7C.5 15.8 0 13.9 0 12h7.5a4.5 4.5 0 0 0 1.1 3Z" fill="#fbbc04" />
+                <path d="M12 34S5.5 27 1.4 17.7L8.6 15l3.4 4.5Z" fill="#34a853" />
+                <circle cx="12" cy="12" r="4.5" fill="#a50e0e" />
+              </svg>
+              {{uiDirections}}<span class="visually-hidden"> ({{uiNewTab}})</span></a
+            >
+            <p class="local-time" data-local-time-row hidden>
+              {{uiLocalTime}}
+              <time datetime="{{weddingDateTime}}" data-local-time>{{weddingDateLabel}}</time>
+            </p>
+          </div>
         </div>
       </section>
 
       <section class="closing-section section" aria-labelledby="closing-heading">
-        <img class="closing-floral" src="assets/images/floral-spray.svg" alt="" width="500" height="600" loading="lazy">
-        <div class="closing-content reveal"><p class="eyebrow">Our day is complete with you</p><h2 id="closing-heading">Come for the wedding.<br>Stay for the <em>memories.</em></h2><p>{{footerMessage}}</p><p class="closing-names">{{brideName}} <span>&amp;</span> {{groomName}}</p><p class="couple-hashtag">{{coupleHashtag}}</p><button class="quiet-button share-button" type="button" data-share-invitation hidden>Share the joy <span aria-hidden="true">↗</span></button><p class="share-status" data-share-status role="status"></p></div>
+        <img
+          class="closing-floral"
+          src="assets/images/floral-spray.svg"
+          alt=""
+          width="500"
+          height="600"
+          loading="lazy"
+        />
+        <div class="closing-content reveal">
+          <p class="eyebrow">{{uiClosingEyebrow}}</p>
+          <h2 id="closing-heading">{{uiComeWedding}}<br />{{uiStayFor}} <em>{{uiMemories}}</em></h2>
+          <p>{{footerMessage}}</p>
+          <p class="closing-regards">{{uiRegards}}</p>
+          <p class="closing-names">{{familySignature}}</p>
+          <button class="quiet-button share-button" type="button" data-share-invitation hidden>
+            {{uiShareJoy}} <span aria-hidden="true">↗</span>
+          </button>
+          <p class="share-status" data-share-status role="status"></p>
+          {{{contactHtml}}}
+        </div>
       </section>
     </main>
 
-    <footer class="footer"><span>{{monogram}}</span><p>Made with love, for the people we love.</p><a href="#invitation">Back to the beginning ↑</a></footer>
+    <footer class="footer">
+      <span>{{groomInitial}} &amp; <span class="bride-initial">{{brideInitial}}</span></span>
+      <p>{{uiFooter}}</p>
+      <a href="#invitation">{{uiBackBeginning}} ↑</a>
+    </footer>
+    <div id="ui-messages" hidden>{{{browserMessages}}}</div>
     <audio data-music-audio data-src="{{musicSource}}" loop preload="none"></audio>
-    <button class="music-toggle" type="button" data-music-toggle aria-pressed="false" aria-label="Play background music" hidden><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="music-label" data-music-label>Music off</span></button>
+    <button
+      class="music-toggle"
+      type="button"
+      data-music-toggle
+      aria-pressed="false"
+      aria-label="{{jsPlayMusic}}"
+      hidden
+    >
+      <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span
+      ><span class="music-label" data-music-label>{{jsMusicOff}}</span>
+    </button>
+    <button class="scroll-prompt" type="button" data-scroll-prompt hidden>
+      {{uiScrollPrompt}}
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+        <path
+          d="m6 9 6 6 6-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
   </body>
 </html>

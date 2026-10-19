@@ -20,6 +20,8 @@ public record WeddingConfig(
         String siteTitle,
         String siteDescription,
         String language,
+        String publicUrl,
+        String contactUrl,
         String brideName,
         String groomName,
         String invitationMessage,
@@ -36,7 +38,7 @@ public record WeddingConfig(
         String storySubtitle,
         String venueImage,
         String venueImageAlt,
-        String coupleHashtag,
+        String familySignature,
         List<Event> events,
         List<StoryPhoto> photos) {
 
@@ -45,18 +47,20 @@ public record WeddingConfig(
         photos = List.copyOf(photos);
     }
 
-    public enum EventIcon { HALDI, MEHENDI, SANGEET, WEDDING }
+    public enum EventIcon { HALDI, MEHENDI, SANGEET, VIVAH, WEDDING }
 
     public record Event(String title, ZonedDateTime dateTime, String description,
-                        String dressCode, URI mapUrl, EventIcon icon) { }
+                        URI mapUrl, EventIcon icon) { }
 
     public record StoryPhoto(String source, String alt, String title, String caption) { }
 
-    /** Loads the invitation details and reports missing or invalid values clearly. */
-    public static WeddingConfig load(Path path) throws IOException {
+    /** Loads the invitation details and reports missing or invalid values clearly. Later files override earlier ones. */
+    public static WeddingConfig load(Path... paths) throws IOException {
         Properties properties = new Properties();
-        try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
-            properties.load(reader);
+        for (Path path : paths) {
+            try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+                properties.load(reader);
+            }
         }
 
         String bride = required(properties, "couple.bride");
@@ -68,6 +72,8 @@ public record WeddingConfig(
                 optional(properties, "site.title", groom + " & " + bride + " | Wedding Invitation"),
                 required(properties, "site.description"),
                 language(required(properties, "site.language")),
+                publicUrl(optional(properties, "site.url", "")),
+                contactUrl(optional(properties, "contact.url", "")),
                 bride,
                 groom,
                 required(properties, "wedding.message"),
@@ -84,7 +90,7 @@ public record WeddingConfig(
                 optional(properties, "story.subtitle", "A few little moments, a lifetime of memories."),
                 assetSource(optional(properties, "venue.image", "assets/images/venue.svg"), "venue.image", false),
                 optional(properties, "venue.imageAlt", "Illustration of a wedding venue"),
-                optional(properties, "couple.hashtag", "#" + groom.replaceAll("\\s+", "") + bride.replaceAll("\\s+", "")),
+                required(properties, "family.signature"),
                 events(properties, dateTime, mapUrl),
                 photos(properties));
     }
@@ -109,11 +115,10 @@ public record WeddingConfig(
             try {
                 icon = EventIcon.valueOf(optional(properties, prefix + "icon", "WEDDING").toUpperCase(Locale.ROOT));
             } catch (IllegalArgumentException exception) {
-                throw new IOException(prefix + "icon must be HALDI, MEHENDI, SANGEET, or WEDDING.", exception);
+                throw new IOException(prefix + "icon must be HALDI, MEHENDI, SANGEET, VIVAH, or WEDDING.", exception);
             }
             events.add(new Event(title, eventDate,
                     optional(properties, prefix + "description", "Join us as we begin our forever."),
-                    optional(properties, prefix + "dressCode", ""),
                     mapUrl(optional(properties, prefix + "mapsUrl", weddingMap.toString()), prefix + "mapsUrl"),
                     icon));
         }
@@ -223,5 +228,35 @@ public record WeddingConfig(
             throw new IOException(key + " contains an invalid asset URL.", exception);
         }
         throw new IOException(key + " must be a relative assets/ path without traversal or a complete HTTPS URL.");
+    }
+
+    private static String publicUrl(String value) throws IOException {
+        if (value.isEmpty()) return "";
+        URI uri = mapUrl(value, "site.url");
+        if (!"https".equalsIgnoreCase(uri.getScheme()) || uri.getUserInfo() != null
+                || uri.getQuery() != null || uri.getFragment() != null) {
+            throw new IOException("site.url must be an HTTPS website root without credentials, query, or fragment.");
+        }
+        return uri.toASCIIString().replaceAll("/+$", "") + "/";
+    }
+
+    private static String contactUrl(String value) throws IOException {
+        if (value.isEmpty()) return "";
+        try {
+            URI uri = URI.create(value);
+            String destination = uri.getSchemeSpecificPart();
+            if (destination == null || destination.chars().anyMatch(Character::isISOControl)
+                    || uri.getFragment() != null || uri.getQuery() != null) {
+                throw new IllegalArgumentException();
+            }
+            boolean valid = switch (String.valueOf(uri.getScheme()).toLowerCase(Locale.ROOT)) {
+                case "mailto" -> destination.matches("[^\\s?]+@[^\\s?]+");
+                case "tel" -> destination.matches("\\+?[0-9][0-9(). -]{3,}");
+                case "https" -> uri.getHost() != null && uri.getUserInfo() == null;
+                default -> false;
+            };
+            if (valid) return uri.toASCIIString();
+        } catch (IllegalArgumentException ignored) { }
+        throw new IOException("contact.url must be a mailto: email address, tel: phone number, or HTTPS link.");
     }
 }

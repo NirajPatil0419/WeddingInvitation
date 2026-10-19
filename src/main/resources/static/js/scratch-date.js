@@ -1,3 +1,5 @@
+import { message as uiText } from "./messages.js";
+
 const GRID_COLUMNS = 24;
 const GRID_ROWS = 16;
 const REVEAL_THRESHOLD = 0.35;
@@ -15,11 +17,11 @@ export function setupScratchDate() {
     if (revealed !== cards.length) return;
     section?.classList.add("is-complete");
     if (revealButton) {
-      revealButton.textContent = "Date revealed";
+      revealButton.textContent = uiText("jsDateRevealed");
       revealButton.disabled = true;
     }
     const status = document.querySelector("[data-date-status]");
-    if (status) status.textContent = "Our wedding date is revealed. Save the date!";
+    if (status) status.textContent = uiText("jsDateStatus");
     document.dispatchEvent(new CustomEvent("invitation:date-revealed"));
   }
 
@@ -45,7 +47,11 @@ export function setupScratchDate() {
     revealers.push(reveal);
 
     let context;
-    try { context = canvas?.getContext("2d"); } catch { /* Date remains available. */ }
+    try {
+      context = canvas?.getContext("2d");
+    } catch {
+      /* Date remains available. */
+    }
     if (!canvas || !context || !("PointerEvent" in window)) {
       reveal();
       return;
@@ -59,7 +65,10 @@ export function setupScratchDate() {
       if (!nextWidth || !nextHeight) return;
       if (width === nextWidth && height === nextHeight) return;
       // A rotation or responsive resize should never erase a guest's progress.
-      if (erasedCells > 0) { reveal(); return; }
+      if (erasedCells > 0) {
+        reveal();
+        return;
+      }
       width = nextWidth;
       height = nextHeight;
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -86,7 +95,7 @@ export function setupScratchDate() {
       context.font = `${Math.max(15, Math.min(24, width / 7))}px Georgia, serif`;
       context.fillText("✦", width / 2, height * 0.34);
       context.font = `${Math.max(10, Math.min(14, width / 11))}px Arial, sans-serif`;
-      context.fillText("Scratch here", width / 2, height * 0.64);
+      context.fillText(uiText("jsScratchHere"), width / 2, height * 0.64);
       context.globalCompositeOperation = "destination-out";
       context.lineCap = "round";
       context.lineJoin = "round";
@@ -130,10 +139,13 @@ export function setupScratchDate() {
       const steps = Math.max(1, Math.ceil(distance / (radius / 2)));
       for (let step = 0; step <= steps; step += 1) {
         const progress = step / steps;
-        markCoverage({
-          x: previous.x + (point.x - previous.x) * progress,
-          y: previous.y + (point.y - previous.y) * progress,
-        }, radius);
+        markCoverage(
+          {
+            x: previous.x + (point.x - previous.x) * progress,
+            y: previous.y + (point.y - previous.y) * progress,
+          },
+          radius,
+        );
       }
       lastPoint = point;
       if (erasedCells / coverage.length >= REVEAL_THRESHOLD) reveal();
@@ -147,7 +159,11 @@ export function setupScratchDate() {
       if (isRevealed || event.button !== 0 || pointerId !== null) return;
       pointerId = event.pointerId;
       lastPoint = null;
-      try { canvas.setPointerCapture(event.pointerId); } catch { /* Capture is optional. */ }
+      try {
+        canvas.setPointerCapture(event.pointerId);
+      } catch {
+        /* Capture is optional. */
+      }
       scratch(event);
     });
     canvas.addEventListener("pointermove", (event) => {

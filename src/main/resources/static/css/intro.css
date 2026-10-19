@@ -1,0 +1,349 @@
+/* Original sage paper gates. These styles affect only the opening experience. */
+.intro {
+  --intro-sage: var(--paper);
+  --intro-ink: var(--ink);
+  --intro-cream: #f7f0db;
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--intro-sage);
+  color: var(--intro-cream);
+  text-align: center;
+  transition: opacity 0.65s ease 4.65s;
+}
+.intro-scene {
+  position: absolute;
+  inset: 0;
+  perspective: 1800px;
+  background: #a5ae96;
+}
+.intro-letter,
+.intro-gate {
+  position: absolute;
+  background-color: var(--intro-sage);
+  background-image:
+    url("../assets/images/paper-grain.svg"),
+    radial-gradient(ellipse at 30% 15%, #d0d0b25c, transparent 60%),
+    linear-gradient(125deg, #b0b59b, #919d83 75%, #8b987f);
+}
+.intro-letter {
+  z-index: 1;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--intro-ink);
+  transform: scale(0.96);
+  transition: transform 2.4s ease 0.6s;
+}
+.intro-arch {
+  position: absolute;
+  inset: 5% max(8%, calc((100% - 780px) / 2)) 4%;
+  border: 2px solid #707e62;
+  border-radius: 48% 48% 3px 3px / 24% 24% 3px 3px;
+  box-shadow:
+    2px 2px 2px #dce0c7,
+    inset 2px 2px 3px #dce0c7,
+    0 0 0 6px #a4ae92,
+    0 0 0 8px #79866a,
+    1px 2px 3px 9px #d2d7bc;
+}
+.intro-letter-botanical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(160px, 29vw, 360px);
+  background: url("../assets/images/sage-botanicals.svg") left bottom / contain no-repeat;
+  opacity: 0.76;
+}
+.intro-letter-botanical-left {
+  left: -5%;
+}
+.intro-letter-botanical-right {
+  right: -5%;
+  transform: rotate(180deg);
+}
+.intro-letter-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2vh, 24px);
+  width: 72%;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.9s ease 1.7s,
+    transform 1.2s ease 1.7s;
+}
+.intro-letter-name {
+  max-width: 100%;
+  font-family: var(--couple-names);
+  font-size: clamp(54px, 9vw, 100px);
+  font-weight: 400;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  text-shadow: 1px 2px 1px #d9ddc2;
+}
+.intro-letter-ampersand {
+  color: #685735;
+  font-size: clamp(26px, 4vw, 42px);
+  font-style: italic;
+  line-height: 1;
+}
+.intro-letter-note {
+  margin-block: 12px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-style: italic;
+}
+.intro-gate {
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transition: transform 2.2s cubic-bezier(0.65, 0, 0.25, 1) 0.25s;
+}
+.intro-gate::before {
+  position: absolute;
+  z-index: 2;
+  inset: 13px;
+  border: 1px solid #e0e3c891;
+  box-shadow:
+    1px 2px 2px #65735c99,
+    inset 1px 1px 2px #65735c99;
+  content: "";
+}
+.intro-gate-left {
+  left: 0;
+  border-right: 1px solid #e2e4cb;
+  box-shadow: 2px 0 3px #344230a1;
+  transform-origin: left center;
+}
+.intro-gate-right {
+  right: 0;
+  border-left: 2px solid #617057;
+  box-shadow: -2px 0 4px #34423061;
+  transform-origin: right center;
+  background-image:
+    url("../assets/images/paper-grain.svg"),
+    radial-gradient(ellipse at 70% 75%, #c4c8aa50, transparent 60%),
+    linear-gradient(235deg, #b0b59b, #959f87 75%, #8b987f);
+}
+.intro-botanical {
+  position: absolute;
+  width: clamp(215px, 37vw, 470px);
+  height: min(90%, 960px);
+  bottom: -2%;
+  left: -5%;
+  background: url("../assets/images/sage-botanicals.svg") left bottom / contain no-repeat;
+}
+.intro-gate-right .intro-botanical {
+  top: -2%;
+  right: -5%;
+  bottom: auto;
+  left: auto;
+  transform: rotate(180deg);
+}
+.intro-kicker {
+  position: absolute;
+  z-index: 7;
+  top: max(40px, 8vh);
+  left: 24px;
+  right: 24px;
+  margin: 0;
+  color: #31402f;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+.intro-trigger {
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--intro-ink);
+  transform: translate(-50%, -50%);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.8s ease,
+    opacity 0.5s ease 0.15s;
+}
+.intro-trigger:focus-visible {
+  outline: 2px solid var(--intro-cream);
+  outline-offset: -4px;
+}
+.intro-tap-label {
+  position: absolute;
+  top: calc(100% + 27px);
+  left: 50%;
+  width: max-content;
+  max-width: 85vw;
+  padding: 10px 16px;
+  border-radius: 30px;
+  background: #e6e7d1e8;
+  box-shadow: 0 2px 12px #52634812;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+.intro-seal {
+  display: block;
+  width: clamp(138px, 18vw, 178px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow:
+    4px 9px 12px #25302173,
+    1px 2px 3px #25302199;
+}
+.intro-seal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Show the supplied round wax seal without its black square corners. */
+  clip-path: circle(49%);
+  user-select: none;
+}
+.intro-light {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 20%, #fffce624 50%, transparent 80%);
+  opacity: 0;
+  transition: opacity 1.8s ease 0.6s;
+}
+.intro-skip {
+  position: absolute;
+  z-index: 12;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #ecedd34d;
+  border-radius: 30px;
+  background: #344332e8;
+  color: var(--intro-cream);
+  font-family: var(--sans);
+  font-size: 12px;
+  text-underline-offset: 4px;
+  text-decoration: underline;
+}
+.intro-skip:focus-visible {
+  outline-color: var(--intro-cream);
+}
+.intro-video {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.intro.is-opening:not(.has-intro-video) {
+  opacity: 0;
+}
+.intro.is-opening:not(.has-intro-video) .intro-gate-left {
+  transform: translateX(-105%) rotateY(-16deg);
+}
+.intro.is-opening:not(.has-intro-video) .intro-gate-right {
+  transform: translateX(105%) rotateY(16deg);
+}
+.intro.is-opening:not(.has-intro-video) .intro-letter {
+  transform: scale(1);
+}
+.intro.is-opening:not(.has-intro-video) .intro-letter-copy {
+  opacity: 1;
+  transform: translateY(0);
+}
+.intro.is-opening:not(.has-intro-video) .intro-trigger {
+  transform: translate(-50%, -50%) scale(1.16) rotate(-12deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.intro.is-opening .intro-kicker,
+.intro.is-opening .intro-tap-label {
+  opacity: 0;
+}
+.intro.is-opening:not(.has-intro-video) .intro-light {
+  opacity: 1;
+}
+.intro.is-video-playing .intro-scene,
+.intro.is-video-playing .intro-trigger {
+  visibility: hidden;
+}
+@media (hover: hover) {
+  .intro-trigger:not(:disabled):hover .intro-seal {
+    filter: brightness(1.08);
+  }
+}
+@media (max-width: 600px) {
+  .intro-botanical {
+    left: -8%;
+    width: 240px;
+    height: 72%;
+  }
+  .intro-gate-right .intro-botanical {
+    right: -8%;
+  }
+  .intro-arch {
+    inset-inline: 9%;
+  }
+  .intro-kicker {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+}
+@media (max-height: 620px) {
+  .intro-kicker {
+    top: 25px;
+  }
+  .intro-seal {
+    width: 116px;
+  }
+  .intro-tap-label {
+    top: calc(100% + 10px);
+  }
+  .intro-letter-copy {
+    gap: 8px;
+  }
+  .intro-letter-name {
+    font-size: 46px;
+  }
+  .intro-letter-note {
+    font-size: 15px;
+    margin-block: 3px;
+  }
+  .intro-letter-ampersand {
+    font-size: 24px;
+  }
+}
+@media (max-height: 420px) {
+  .intro-kicker {
+    display: none;
+  }
+  .intro-letter-note {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .intro * {
+    transition: none !important;
+  }
+}

@@ -1,1 +1,19 @@
+/build/
+/dist/
+/.vercel/
+/node_modules/
+/test-results/
+/playwright-report/
+__pycache__/
+*.pyc
+.DS_Store
 
+# Local secrets such as the Vercel token
+.env
+*.env
+
+.vercel
+.env*
+
+# Local Claude Code settings
+.claude/

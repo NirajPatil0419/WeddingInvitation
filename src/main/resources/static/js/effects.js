@@ -9,13 +9,16 @@ export function setupScrollEffects() {
   };
 
   if (!motionQuery?.matches && "IntersectionObserver" in window) {
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: "0px 0px -20px 0px" });
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -20px 0px" },
+    );
     elements.forEach((element) => observer.observe(element));
     document.body.classList.add("motion-ready");
   } else {
@@ -50,6 +53,64 @@ export function setupScrollEffects() {
   updateProgress();
 }
 
+// Guests who pause anywhere before the end of the invitation are nudged to keep scrolling.
+const SCROLL_PROMPT_IDLE_MS = 4000;
+// Near the footer there is nothing left to discover.
+const SCROLL_PROMPT_END_MARGIN = 120;
+
+export function setupScrollPrompt() {
+  const prompt = document.querySelector("[data-scroll-prompt]");
+  if (!prompt) return;
+  const motionQuery = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  let idleTimer;
+  let hideTimer;
+
+  const remaining = () =>
+    document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+
+  function hide() {
+    if (prompt.hidden) return;
+    prompt.classList.remove("is-visible");
+    // Wait for the fade before removing it from the accessibility tree.
+    window.clearTimeout(hideTimer);
+    hideTimer = window.setTimeout(() => (prompt.hidden = true), motionQuery?.matches ? 0 : 400);
+  }
+
+  function show() {
+    if (document.hidden || remaining() < SCROLL_PROMPT_END_MARGIN) return;
+    window.clearTimeout(hideTimer);
+    prompt.hidden = false;
+    window.requestAnimationFrame(() => prompt.classList.add("is-visible"));
+  }
+
+  function restartIdleTimer() {
+    window.clearTimeout(idleTimer);
+    if (!document.hidden) idleTimer = window.setTimeout(show, SCROLL_PROMPT_IDLE_MS);
+  }
+
+  function onScroll() {
+    hide();
+    restartIdleTimer();
+  }
+
+  prompt.addEventListener("click", () => {
+    window.scrollBy({
+      top: window.innerHeight * 0.8,
+      behavior: motionQuery?.matches ? "auto" : "smooth",
+    });
+    hide();
+  });
+  document.addEventListener(
+    "invitation:opened",
+    () => {
+      window.addEventListener("scroll", onScroll, { passive: true });
+      document.addEventListener("visibilitychange", restartIdleTimer);
+      restartIdleTimer();
+    },
+    { once: true },
+  );
+}
+
 export function setupPetals() {
   const container = document.querySelector("[data-petals]");
   if (!container) return;
@@ -69,9 +130,9 @@ export function setupPetals() {
       petal.className = "petal";
       petal.setAttribute("aria-hidden", "true");
       petal.style.setProperty("--left", `${(index * 37 + 4) % 100}%`);
-      petal.style.setProperty("--size", `${7 + index % 5}px`);
+      petal.style.setProperty("--size", `${7 + (index % 5)}px`);
       petal.style.setProperty("--delay", `${-index * 2.3}s`);
-      petal.style.setProperty("--duration", `${16 + index % 7 * 2}s`);
+      petal.style.setProperty("--duration", `${16 + (index % 7) * 2}s`);
       petal.style.setProperty("--drift", `${index % 2 ? -70 : 70}px`);
       petal.style.setProperty("--rotation", `${index * 43}deg`);
       fragment.appendChild(petal);
@@ -80,7 +141,14 @@ export function setupPetals() {
     created = true;
   }
 
-  document.addEventListener("invitation:opened", () => { opened = true; synchronize(); }, { once: true });
+  document.addEventListener(
+    "invitation:opened",
+    () => {
+      opened = true;
+      synchronize();
+    },
+    { once: true },
+  );
   document.addEventListener("visibilitychange", synchronize);
   motionQuery?.addEventListener?.("change", synchronize);
   synchronize();

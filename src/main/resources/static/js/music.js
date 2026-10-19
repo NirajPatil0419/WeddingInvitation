@@ -1,6 +1,24 @@
+import { message as uiText } from "./messages.js";
+
 // An original, quiet pentatonic melody provides music without a downloaded track.
-const MELODY = [523.25, 659.25, 783.99, 659.25, 587.33, 523.25, 440, 523.25,
-  659.25, 783.99, 880, 783.99, 659.25, 587.33, 523.25, null];
+const MELODY = [
+  523.25,
+  659.25,
+  783.99,
+  659.25,
+  587.33,
+  523.25,
+  440,
+  523.25,
+  659.25,
+  783.99,
+  880,
+  783.99,
+  659.25,
+  587.33,
+  523.25,
+  null,
+];
 const NOTE_SPACING = 0.9;
 
 export function createMusicController() {
@@ -20,10 +38,11 @@ export function createMusicController() {
   const activeVoices = new Set();
 
   function update(message) {
-    if (label) label.textContent = message || (playing ? "Music on" : "Music off");
+    if (label)
+      label.textContent = message || (playing ? uiText("jsMusicOn") : uiText("jsMusicOff"));
     if (button) {
       button.setAttribute("aria-pressed", String(playing));
-      button.setAttribute("aria-label", playing ? "Pause wedding music" : "Play wedding music");
+      button.setAttribute("aria-label", playing ? uiText("jsPauseMusic") : uiText("jsPlayMusic"));
       button.classList.toggle("is-playing", playing);
     }
   }
@@ -74,7 +93,11 @@ export function createMusicController() {
     timer = undefined;
     if (audio) audio.pause();
     activeVoices.forEach((voice) => {
-      try { voice.stop(); } catch { /* An already-ended note needs no cleanup. */ }
+      try {
+        voice.stop();
+      } catch {
+        /* An already-ended note needs no cleanup. */
+      }
     });
     activeVoices.clear();
     if (context?.state === "running") context.suspend().catch(() => {});
@@ -128,7 +151,7 @@ export function createMusicController() {
     } catch {
       if (attempt !== generation) return;
       pause();
-      update("Tap for music");
+      update(uiText("jsTapMusic"));
     } finally {
       if (attempt === generation) starting = false;
     }
@@ -140,7 +163,10 @@ export function createMusicController() {
   }
 
   button?.addEventListener("click", toggle);
-  audio?.addEventListener("error", () => { pause(); update("Music unavailable"); });
+  audio?.addEventListener("error", () => {
+    pause();
+    update(uiText("jsMusicUnavailable"));
+  });
   audio?.addEventListener("pause", () => {
     if (audio.paused && (playing || starting)) pause();
   });
@@ -151,5 +177,5 @@ export function createMusicController() {
   });
   update();
   if (button) button.hidden = !source && !AudioContextClass;
-  return { start, pause, toggle };
+  return { start, pause, toggle, isPlaying: () => playing };
 }

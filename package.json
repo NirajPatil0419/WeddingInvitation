@@ -1,0 +1,20 @@
+{
+  "name": "wedding-invitation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Development checks for the Java-generated static invitation",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node scripts/test.cjs",
+    "test:browser": "node tests/browser/interaction-check.cjs && node tests/browser/visual-check.cjs",
+    "format": "prettier --write src/main/resources/static/css src/main/resources/static/js src/main/resources/templates tests scripts/*.cjs package.json .github/workflows",
+    "format:check": "prettier --check src/main/resources/static/css src/main/resources/static/js src/main/resources/templates tests scripts/*.cjs package.json .github/workflows"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "prettier": "3.9.8"
+  }
+}
